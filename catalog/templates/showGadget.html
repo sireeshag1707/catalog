@@ -1,0 +1,45 @@
+{% include 'nav.html' %}
+<div class="main">
+{% block content %}
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	            <p class="h4"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	{% endif %}	    
+{% endwith %}
+{% if 'username' in session %}
+<button type="button" class="btn btn-warning" style="margin: 5px 0px 5px 25px; font-family:Bradley Hand ITC; background-color:#ff99ff;"><a href="{{url_for('addGadgetDetails',Gdname=tb.name)}}" style="text-decoration: none; color:purple;"><strong>Add New Gadget</strong></a></button>
+
+{% endif %}
+<div class="row" style="margin: 10px; "  >
+{% for Gd in Gds %}
+
+	<div class="col-sm-4 text-center">
+		<div class="panel panel-primary" style="border-radius:15%;" >
+			<div class="panel-heading" style="background-color: #99ffd6;border-radius:45%;" >
+				<h4 style="font-family:Bradley Hand ITC;color:black;" ><b>{{ Gd.name }}</b></h4>
+			</div>
+			<div class="panel-body text-center">
+				<table style="font-family:Bradley Hand ITC; background-color: #ffb3b3; border-radius:8%; width:270px;">
+					<tr><th> <b>GadgetType</b></th><td>:</td><td><h5> <b>{{ Gd.Gadgettype }}</b></h5></td></tr>
+					<tr><th> <b>GadgetColor</b></th><td>:</td><td><h5><b>{{ Gd.color }}</b></h5></td></tr>
+					<tr><th><b>GadgetPrice</b></th><td>:</td><td><h5><b>{{ Gd.price }}</b></h5></td></tr>
+				</table>
+			</div>
+			{% if 'username' in session %}
+			<div class="panel-footer">
+					<button type="button" class="btn btn-info" style="border-radius:40%; font-family:Bradley Hand ITC; padding-right:20px; background-color:#00cc99"><a href="{{ url_for('editGadget',Gdid=tb.id,Gdsname=Gd.name) }}"style="text-decoration: none;color:black; font-size:15px; width:10px; "><b>EDIT</b></a></button>
+					<button type="button" class="btn btn-danger" style="border-radius:40%; font-family:Bradley Hand ITC; background-color: #ff8080;"><a href="{{ url_for('deleteGadget',Gdid=tb.id,Gdsname=Gd.name)}}"style="text-decoration: none;color:black;font-size:15px;"><b>DELETE</b></a></button>
+			</div>
+			{% endif %}	
+			
+		</div>
+	</div>
+{% endfor %}
+</div>
+{% endblock content %}
+</div>

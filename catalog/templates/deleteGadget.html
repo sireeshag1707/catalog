@@ -1,0 +1,21 @@
+{% include 'nav.html' %}
+<div class="main">
+{% block content %}
+	<div class="">
+			<div class="text-center">
+				<div class="panel panel-primary" style="width: 38rem;">
+					<form action="{{url_for('deleteGadget',Gdid=Gdid,Gdsname=Gadgetdetails.name)}}" method="POST">
+						<div class="panel-body">
+							<h4 style="color:purple; background-color:#E0FFFF; height:10rem; border-radius:10%; font-size:24px;">Are you sure you want to delete {{Gadgetdetails.name}}</h4>
+						</div>
+						<div class="panel-footer text-center">
+							<input type="submit" class="btn btn-danger" value="Delete" style="margin-right: 10px; border-radius:40%;">
+						    <button type="button" class="btn btn-warning" style="border-radius:40%;"><a href="/home">Cancel</a></button>
+						</div>
+						
+					</form>
+				</div>
+			</div>
+	</div>
+{% endblock content %}	
+</div>
